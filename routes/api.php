@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PlaceController;
+use App\Http\Controllers\Api\ProductCatalogController;
 use App\Http\Controllers\Api\SalesLeadController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\ServiceCatalogController;
 use App\Http\Controllers\Api\ServiceLeadController;
 use App\Http\Controllers\Api\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Api\Admin\DashboardController as AdminDashboardController;
@@ -29,11 +33,21 @@ Route::prefix('v1')->group(function () {
     Route::post('/send-otp', [AuthController::class, 'sendOtp']);
     Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 
+    // App user profile (create/update by phone after OTP verification)
+    Route::post('/profile', [ProfileController::class, 'store']);
+
     // Sales leads (product orders)
     Route::post('/sales-lead', [SalesLeadController::class, 'store']);
 
     // Service leads (service bookings)
     Route::post('/service-lead', [ServiceLeadController::class, 'store']);
+
+    // Places for mobile app (active places by default)
+    Route::get('/places', [PlaceController::class, 'index']);
+
+    // Public catalog for mobile app
+    Route::get('/products', [ProductCatalogController::class, 'index']);
+    Route::get('/services', [ServiceCatalogController::class, 'index']);
 
     /*
     |--------------------------------------------------------------------------

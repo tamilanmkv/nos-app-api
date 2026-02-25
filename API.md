@@ -155,6 +155,136 @@ Create a new service booking from the app.
 
 ---
 
+### 5. Get Places (Mobile App)
+
+**GET** `/api/v1/places`
+
+Returns places for app usage (dropdowns/selection). By default, only active places are returned.
+
+**Query params:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| search | string | no | Filter by place name/address |
+| include_inactive | boolean/int | no | `1` or `true` to include inactive places |
+
+**Response (200):**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Sivaganga",
+      "address": "Sivaganga, Tamil Nadu",
+      "isActive": true,
+      "services": [
+        { "id": 1, "name": "RO Service" }
+      ],
+      "products": [
+        { "id": 3, "name": "CCTV CAMERA" }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+### 6. Get Products (Mobile App Catalog)
+
+**GET** `/api/v1/products`
+
+Returns product catalog for app sales screen.
+
+**Query params:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| search | string | no | Filter by product name/description |
+
+**Response (200):**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "1",
+      "name": "CCTV CAMERA",
+      "category": "CCTV",
+      "description": "Indoor/outdoor security camera",
+      "basePrice": 2499,
+      "originalPrice": 3999,
+      "discount": 38,
+      "images": ["https://..."],
+      "specifications": { "Resolution": "1080p" },
+      "variants": [
+        {
+          "id": "var-1",
+          "name": "1080p",
+          "price": 2499,
+          "originalPrice": 3999,
+          "specifications": {},
+          "inStock": true,
+          "stockCount": 10
+        }
+      ],
+      "rating": 4.5,
+      "reviewCount": 0,
+      "warranty": null,
+      "model": "CCTV-CAMERA"
+    }
+  ]
+}
+```
+
+---
+
+### 7. Get Services (Mobile Catalog)
+
+**GET** `/api/v1/services`
+
+Returns service catalog for app services screen.
+
+**Query params:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| search | string | no | Filter by service name/description |
+
+**Response (200):**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "1",
+      "name": "AC Service",
+      "category": "AC Service",
+      "description": "Complete AC maintenance",
+      "priceRange": "From ₹499",
+      "icon": "snowflake",
+      "image": null,
+      "serviceTypes": [
+        {
+          "id": "srv-type-1",
+          "name": "Deep Cleaning",
+          "description": "Indoor and outdoor cleaning",
+          "price": 499,
+          "duration": "2-3 hours",
+          "isCustom": false
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
 ## Admin API (NOS Master Web)
 
 Base URL: `/api/v1/admin`. Used by the admin dashboard. All endpoints except login require a Bearer token (see Admin login below).
