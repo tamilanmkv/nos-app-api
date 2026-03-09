@@ -17,6 +17,8 @@ use App\Http\Controllers\Api\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Api\Admin\PlaceController as AdminPlaceController;
 use App\Http\Controllers\Api\Admin\ServiceCatalogController as AdminServiceCatalogController;
 use App\Http\Controllers\Api\Admin\ProductCatalogController as AdminProductCatalogController;
+use App\Http\Controllers\Api\Admin\AppUserController as AdminAppUserController;
+use App\Http\Controllers\Api\Admin\CustomerController as AdminCustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +71,11 @@ Route::prefix('v1')->group(function () {
             Route::post('/logout', [AdminAuthController::class, 'logout']);
             Route::get('/me', [AdminAuthController::class, 'me']);
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+            Route::get('/app-users', [AdminAppUserController::class, 'index']);
+            Route::get('/customers', [AdminCustomerController::class, 'index']);
+            Route::post('/customers', [AdminCustomerController::class, 'store']);
+            Route::patch('/customers/{id}', [AdminCustomerController::class, 'update']);
+            Route::delete('/customers/{id}', [AdminCustomerController::class, 'destroy']);
             Route::get('/sales-leads', [AdminSalesLeadController::class, 'index']);
             Route::post('/sales-leads', [AdminSalesLeadController::class, 'store']);
             Route::get('/sales-leads/{id}', [AdminSalesLeadController::class, 'show']);

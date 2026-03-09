@@ -178,7 +178,7 @@ class ServiceLeadController extends Controller
             'bookingDate' => $lead->booking_date?->toIso8601String(),
             'timeSlot' => $lead->time_slot,
             'status' => $labels[$lead->status] ?? $lead->status,
-            'assignedTo' => $lead->assigned_to,
+            'assignedTo' => $lead->assigned_to !== null ? (string) $lead->assigned_to : null,
             'placeId' => $lead->place_id,
             'place' => $lead->place ? $lead->place->name : null,
             'createdAt' => $lead->created_at?->toIso8601String(),

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AppUser extends Model
 {
@@ -14,6 +15,7 @@ class AppUser extends Model
         'email',
         'city',
         'dob',
+        'place_id',
     ];
 
     protected function casts(): array
@@ -21,5 +23,10 @@ class AppUser extends Model
         return [
             'dob' => 'date',
         ];
+    }
+
+    public function place(): BelongsTo
+    {
+        return $this->belongsTo(Place::class);
     }
 }

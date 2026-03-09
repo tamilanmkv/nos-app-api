@@ -180,7 +180,7 @@ class SalesLeadController extends Controller
             'unitPrice' => $lead->unit_price ? (float) $lead->unit_price : null,
             'totalAmount' => $lead->total_amount ? (float) $lead->total_amount : null,
             'status' => $labels[$lead->status] ?? $lead->status,
-            'assignedTo' => $lead->assigned_to,
+            'assignedTo' => $lead->assigned_to !== null ? (string) $lead->assigned_to : null,
             'placeId' => $lead->place_id,
             'place' => $lead->place ? $lead->place->name : null,
             'createdAt' => $lead->created_at?->toIso8601String(),
